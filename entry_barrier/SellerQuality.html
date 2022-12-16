@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 4: Player B's choice of X and Y.
+{% endblock %}
+
+{% block content %}
+
+    <p>
+    As player B, please choose to produce between X and Y at this stage. <br>
+    At Stage 2, the choice of your price is {{ player.decision_price }}. <br>
+    At Stage 3, {{ player.num_of_trade }} player A choose(s) to purchase product from you.
+    </p>
+
+    {% formfield player.decision_quality label="Which product you want to produce?" %}
+
+    <p>
+    Your payoff in this round: <br>
+        you will get {{ Constants.e_s }} if you choose to stay outside the market at Stage 1. <br>
+        You will get 0 if you chooses to enter the market at Stage 1 but no player A purchases from you. <br>
+        If one or more player A choose to purchase from you, for each player A, you will get the price you choose at Stage 2 minus {{ Constants.c_l }} if you produces X. <br>
+        You will get your price minus {{ Constants.c_h }} if you produces Y. <br>
+        Note: if you have multiple player A purchasing from you, your payoff will be multiplied by the number of player A that purchase from you. <br>
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

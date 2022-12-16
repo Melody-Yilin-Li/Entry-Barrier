@@ -1,0 +1,40 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instruction
+{% endblock %}
+
+{% block content %}
+
+    <p>
+    Before player A make decision at stage 3, they can observe all player B's past choices. <br>
+    Each player B's history shows the product and price labelled by the round number. <br>
+    Price is either a number or "None" if player B does not have the chance to product. <br>
+    Product is either a letter X/Y or N.
+    N appears either because that player B stays outside the market at stage 1 or no player A purchases from that player B at stage 3. <br>
+    </p>
+
+    <p>
+    Payoff is calculated as follows: <br>
+    For player A: <br>
+        you will get {{ Constants.e_b }} if you choose not to purchase at Stage 3 or when all player B choose to stay outside the market at Stage 1. <br>
+        If you choose to purchase from a player B, you will receive {{ Constants.u_l }} minus player B's price if that player B produces X. <br>
+        You will receive {{ Constants.u_h }} minus player B's price if she produces Y. <br>
+    For player B: <br>
+        you will get {{ Constants.e_s }} if you choose to stay outside the market at Stage 1. <br>
+        You will get 0 if you chooses to enter the market at Stage 1 but no player A purchases from you. <br>
+        If one or more player A choose to purchase from you, for each player A, you will get the price you choose at Stage 2 minus {{ Constants.c_l }} if you produces X. <br>
+        You will get your price minus {{ Constants.c_h }} if you produces Y. <br>
+        Note: if you have multiple player A purchasing from you, your payoff will be multiplied by the number of player A that purchase from you. <br>
+    Your total payoff will be your cumulative payoff in this experiment.
+    </p>
+
+    <p>
+    If you finish reading, please press next to go to the next page.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
+

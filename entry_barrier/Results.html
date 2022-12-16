@@ -1,0 +1,47 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Results
+{% endblock %}
+
+{% block content %}
+    {% if player.role == 'buyer' %}
+        <p>
+        As player A,
+        {% if group.seller_in_market == 0 %}
+            no seller enters the market.
+        {% else %}
+            {% if player.decision_buy > 0 %}
+            you purchase from player B (ID: {{ player.decision_buy }}).
+            {% else %}
+            you choose not to purchase from any player B.
+            {% endif %}
+        {% endif %}
+        You receive {{ player.payoff }} in this round. You cumulative payoff is {{ cumulative_payoff }}.
+        </p>
+    {% else %}
+        <p>
+        As player B,
+        {% if player.decision_entry == 1 and player.decision_quality == 0 %}
+            you choose to enter the market, product X with price {{ player.decision_price }}. {{ player.num_of_trade }} player A choose(s) to purchase product from you.
+        {% else %}
+            {% if player.decision_entry == 1 and player.decision_quality == 1 %}
+                you choose to enter the market, product Y with price {{ player.decision_price }}. {{ player.num_of_trade }} player A choose(s) to purchase product from you.
+            {% else %}
+                {% if player.decision_entry == 0 %}
+                    you stay outside the market.
+                {% else %}
+                    no player A purchases from you.
+                {% endif %}
+            {% endif %}
+        {% endif %}
+        You receive {{ player.payoff }} in this round. You cumulative payoff is {{ cumulative_payoff }}.
+        </p>
+
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}
+

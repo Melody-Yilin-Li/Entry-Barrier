@@ -1,0 +1,35 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 2: Player B's product price
+{% endblock %}
+
+{% block content %}
+
+    {% if Constants.fix_price == 0 %}
+        <p>
+        {{ group.seller_in_market }} player B entered the market at Stage 1. <br>
+        As player B, please choose the price of your product. Your price is an integer between {{ min_price }} and {{ max_price }}. <br>
+        </p>
+    {% else %}
+        <p>
+        {{ group.seller_in_market }} player B entered the market at Stage 1. <br>
+        As player B, your price is fixed at {{ Constants.p_default }}. Please put in 55. <br>
+        </p>
+    {% endif %}
+
+    {% formfield player.decision_price label="Please choose the price of your product." %}
+
+    <p>
+    Your payoff in this round: <br>
+        you will get {{ Constants.e_s }} if you choose to stay outside the market at Stage 1. <br>
+        You will get 0 if you chooses to enter the market at Stage 1 but no player A purchases from you. <br>
+        If one or more player A choose to purchase from you, for each player A, you will get the price you choose at Stage 2 minus {{ Constants.c_l }} if you produces X. <br>
+        You will get your price minus {{ Constants.c_h }} if you produces Y. <br>
+        Note: if you have multiple player A purchasing from you, your payoff will be multiplied by the number of player A that purchase from you. <br>
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 3: Player A's purchase
+{% endblock %}
+
+{% block content %}
+
+    <p>
+    You are player A.
+    An this stage, you need to decide which player B you want to purchase the product from. <br>
+    Please pick the player B's ID that you want to make the purchase. <br>
+    You can observe player B's history and their current price before you make your decision. <br>
+    If you do not want to buy and want to receive the reserved payoff, just do not make the choice and press next. <br>
+    If no seller enters the market, there is nothing for you to choose so just press next.
+    </p>
+
+    {% formfield player.decision_buy label="Which seller do you want to purchase the product from?" %}
+
+    {% for p in group.get_players %}
+        {% if p.decision_entry == 1 %}
+            player B (ID: {{ p.id_in_group }})'s current price is: {{ p.decision_price }}.
+            player B (ID: {{ p.id_in_group }})'s history is: <br>
+            <table border="1">
+            <tr>
+                <td>Round</td>
+                {% for i in p.history_of_seller %}
+                <td>{{ i.round_number }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Product</td>
+                {% for i in p.history_of_seller %}
+	            <td>{{ i.choice }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <td>Price</td>
+                {% for i in p.history_of_seller %}
+	            <td>{{ i.price }}</td>
+                {% endfor %}
+            </tr>
+            </table>
+        {% endif %}
+    {% endfor %}
+
+    <p>
+    Your payoff in this round: <br>
+        you will get {{ Constants.e_b }} if you choose not to purchase at Stage 3 or when all player B choose to stay outside the market at Stage 1. <br>
+        If you choose to purchase from a player B, you will receive {{ Constants.u_l }} minus player B's price if that player B produces X. <br>
+        You will receive {{ Constants.u_h }} minus player B's price if she produces Y. <br>
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

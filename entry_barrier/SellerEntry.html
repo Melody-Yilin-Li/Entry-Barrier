@@ -1,0 +1,28 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Stage 1: Player B's market entry
+{% endblock %}
+
+{% block content %}
+
+    <p>
+    You are player B.
+    At this stage, please choose whether to enter the market.
+    </p>
+
+    {% formfield player.decision_entry label="Do you want to enter the market?" %}
+
+    <p>
+    Your payoff in this round: <br>
+        you will get {{ Constants.e_s }} if you choose to stay outside the market at Stage 1. <br>
+        You will get 0 if you chooses to enter the market at Stage 1 but no player A purchases from you. <br>
+        If one or more player A choose to purchase from you, for each player A, you will get the price you choose at Stage 2 minus {{ Constants.c_l }} if you produces X. <br>
+        You will get your price minus {{ Constants.c_h }} if you produces Y. <br>
+        Note: if you have multiple player A purchasing from you, your payoff will be multiplied by the number of player A that purchase from you. <br>
+    </p>
+
+    {% next_button %}
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Welcome to LEEPS Laboratory!
+{% endblock %}
+
+{% block content %}
+
+<p>
+    Thank you for participating in this interactive  decision-making experiment.
+</p>
+
+<p>
+    From now until the end of the experiment, please turn off your phone and do not communicate with other participants. <br>
+    If you have any questions, please raise your hand; an experimenter will come and answer your question. <br>
+    Please pay careful attention to the instructions as real money is at stake. <br>
+    During the experiment you will earn points, and at the end of the experiment all your earnings will be converted to US dollars. <br>
+    You are guaranteed a show up fee of $5.00 but can earn considerably more.
+</p>
+
+<p>
+    Please press next button to read the instructions.
+</p>
+
+    {% next_button %}
+
+{% endblock %}
+

@@ -1,0 +1,43 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instruction
+{% endblock %}
+
+{% block content %}
+
+    <p>
+    In this experiment, you might encounter 4 environments:
+    </p>
+
+    <p>
+    The price can be either fixed or flexible: <br>
+        If price is flexible: sellers are allow to enter the price within a given range at Stage 2. <br>
+        If price is fixed: seller still need to input their price at Stage 2 but there will be only one option. <br>
+    The seller's market entry can be either simultaneous or sequential: <br>
+        If market entry is simultaneous: all sellers are in the experiment from round 1 and can choose whether to enter the market, the price and the product. <br>
+        If market entry is sequential: Half of the sellers play the experiment as usual. The other half cannot enter the market at the beginning of the experiment and can join at round 5.
+        If you are randomly selected to join the experiment at round {{ Constants.mid_round }}, you cannot make any decision before {{ Constants.mid_round }} and will receive {{ Constants.e_s }} every round.<br>
+    </p>
+
+    {% if Constants.fix_price == 1 %}
+        <p>You will play fix price in this experiment.</p>
+    {% else %}
+        <p>You will play flexible price in this experiment.</p>
+    {% endif %}
+
+    {% if Constants.seq_entry == 1 %}
+        <p>You will play sequential market entry in this experiment.</p>
+    {% else %}
+        <p>You will play simultaneous market entry in this experiment.</p>
+    {% endif %}
+
+    <p>
+    If you finish reading, please press next to start the experiment.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
+

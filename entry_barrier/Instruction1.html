@@ -1,0 +1,50 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+    Instruction
+{% endblock %}
+
+{% block content %}
+
+    <p>
+    The experiment has multiple rounds.
+    In the experiment, participants will be equally divided into two roles: player A and player B.
+    Players interact with each other in a virtual market, where player B sells their products to player A.
+    Your role does not change during the experiment.
+    Participants are divided into groups of 4 people with 2 player A and 2 player B.
+    You will be grouped with the same participants during the experiment.
+    </p>
+
+    <p>
+    Each round has multiple stages as follows: <br>
+    Stage 1: <br>
+        All player B choose whether to enter the market. <br>
+        If player B chooses to stay outside the market, her round ends. <br>
+        If player B chooses to enter the market, she will move to Stage 2. <br>
+    Stage 2: <br>
+        If the experiment allows, player B who entered the market at Stage 1 can choose the price of her product. <br>
+        Otherwise price will be given by the system. <br>
+    Stage 3: <br>
+        Observing player B's choices of products in the past rounds and price in the current round,
+        Player A chooses which player B to purchase from. <br>
+        Player A can only purchase from player B who enter the market in the current round. <br>
+        Player A can also choose to buy nothing and earn a reserved payoff. <br>
+    Stage 4: <br>
+        If player B receives purchase one or more player A, she chooses to produce X or Y, which determined the payoff both player. <br>
+    </p>
+
+    <p>
+    The results will be calculated after stage 4.
+    All participants receive the payoff in the current round and the experiment moves to the next round.
+    In the next round, the experiment will repeat Stage 1 - 4 but the history of player B will remain observable to player A.
+    </p>
+
+    <p>
+    If you finish reading, please press next to go to the next page.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
+
