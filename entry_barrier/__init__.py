@@ -25,7 +25,7 @@ class Constants(BaseConstants):
     p_default = 55
     e_b = 20
     e_s = 10
-    seq_entry = 0
+    seq_entry = 1
     fix_price = 0
 
 
@@ -70,7 +70,7 @@ class Group(BaseGroup):
                 if p.decision_entry == 0:
                     p.payoff = Constants.e_s
                 elif p.num_of_trade() > 0:
-                    p.payoff = (p.decision_price - p.decision_quality * Constants.c_h - (1 - p.decision_quality) * Constants.c_l) * p.num_of_trade()
+                    p.payoff = (p.decision_price - p.field_maybe_none('decision_quality') * Constants.c_h - (1 - p.field_maybe_none('decision_quality')) * Constants.c_l) * p.num_of_trade()
                 else:
                     p.payoff = 0
 
@@ -100,7 +100,7 @@ class Player(BasePlayer):
         num_of_trade = 0
         player_id = self.id_in_group
         for p in self.get_others_in_group():
-            if p.role() == 'buyer' and p.decision_buy == player_id:
+            if p.role() == 'buyer' and p.field_maybe_none('decision_buy') == player_id:
                 num_of_trade = num_of_trade + 1
         return num_of_trade
 
@@ -140,6 +140,7 @@ class Player(BasePlayer):
     decision_price = models.IntegerField()
 
     decision_buy = models.IntegerField(
+        initial=0,
         widget=widgets.RadioSelect,
         blank=True, 
     )

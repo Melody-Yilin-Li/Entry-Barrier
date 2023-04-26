@@ -12,7 +12,7 @@
         {% if group.seller_in_market == 0 %}
             no seller enters the market.
         {% else %}
-            {% if player.decision_buy > 0 %}
+            {% if player.field_maybe_none('decision_buy') > 0 %}
             you purchase from player B (ID: {{ player.decision_buy }}).
             {% else %}
             you choose not to purchase from any player B.
@@ -23,19 +23,18 @@
     {% else %}
         <p>
         As player B,
-        {% if player.decision_entry == 1 and player.decision_quality == 0 %}
-            you choose to enter the market, product X with price {{ player.decision_price }}. {{ player.num_of_trade }} player A choose(s) to purchase product from you.
+        {% if player.decision_entry == 0 %}
+            you stay outside the market.
         {% else %}
-            {% if player.decision_entry == 1 and player.decision_quality == 1 %}
-                you choose to enter the market, product Y with price {{ player.decision_price }}. {{ player.num_of_trade }} player A choose(s) to purchase product from you.
+            {% if player.field_maybe_none('decision_quality') == 0 %}
+                you choose to enter the market, product X with price {{ player.decision_price }}. {{ player.num_of_trade }} player A choose(s) to purchase product from you.
+            {% elif player.field_maybe_none('decision_quality') == 1 %}
+                you choose to enter the market, product Y with price {{ player.decision_price }}. {{ player.num_of_trade }} player A choose(s) to purchase product from you. 
             {% else %}
-                {% if player.decision_entry == 0 %}
-                    you stay outside the market.
-                {% else %}
-                    no player A purchases from you.
-                {% endif %}
+                no player A purchases from you.
             {% endif %}
         {% endif %}
+
         You receive {{ player.payoff }} in this round. You cumulative payoff is {{ cumulative_payoff }}.
         </p>
 
